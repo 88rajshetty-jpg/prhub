@@ -1,0 +1,732 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Shetty | Frontend Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --bg: #f3f4f6;
+            --white: #ffffff;
+            --black: #0f172a;
+            --gray: #5f6372;
+            --muted: #64748b;
+            --border: rgba(15, 23, 42, 0.08);
+            --accent: #000000;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--black);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 100;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 18px 36px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--black);
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .contact-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 0.85rem 1.3rem;
+            border-radius: 999px;
+            border: none;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            min-height: 100vh;
+            padding: 120px 64px 60px;
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .hero-bg {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 55%;
+            height: 100%;
+            background: var(--black);
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+
+        .hero-content,
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content p {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            line-height: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content .subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            border-radius: 16px;
+            background: var(--white);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            color: var(--black);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width:100% ;
+            max-width: 450px;
+            height: auto;
+            border-radius: 28px;
+            object-fit: cover;
+            box-shadow: 0 30px 70px rgba(15, 23, 42, 0.16);
+          
+}
+        
+
+        .section-header {
+            text-align: center;
+            margin: 60px auto 40px;
+            max-width: 720px;
+        }
+
+        .section-header h2 {
+            display: inline-flex;
+            border: 3px solid var(--black);
+            padding: 12px 36px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        .about {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px 60px;
+            text-align: center;
+        }
+
+        .about p {
+            color: var(--gray);
+            margin: 0 auto 40px;
+            max-width: 780px;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .service-item {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 30px 26px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+            min-height: 220px;
+        }
+
+        .service-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(15, 23, 42, 0.15);
+        }
+
+        .service-item i {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            color: var(--accent);
+        }
+
+        .service-item h3 {
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .service-item p {
+            color: var(--gray);
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 32px 60px;
+        }
+
+        .skill-category {
+            margin-bottom: 42px;
+        }
+
+        .skill-category h4 {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: var(--gray);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(140px, 1fr));
+            gap: 22px;
+        }
+
+        .skill-item {
+            background: var(--white);
+            border-radius: 22px;
+            padding: 22px 16px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            text-align: center;
+        }
+
+        .skill-item i {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .skill-item span {
+            font-size: 0.78rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-banner {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        .portfolio-banner h2 {
+            border-color: white;
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            padding: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 16/9;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .contact {
+            max-width: 700px;
+            margin: 0 auto 80px;
+            padding: 0 32px;
+            text-align: center;
+        }
+
+        .contact p {
+            color: var(--gray);
+            margin-bottom: 32px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: var(--white);
+            color: var(--black);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
+        }
+
+        .submit-btn {
+            width: min(240px, 100%);
+            justify-self: center;
+            padding: 16px 30px;
+            border-radius: 999px;
+            border: 2px solid var(--black);
+            background: transparent;
+            color: var(--black);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 38px 32px;
+            text-align: center;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-socials a {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            color: white;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .footer-socials a:hover {
+            transform: translateY(-2px);
+            border-color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 140px 32px 40px;
+            }
+
+            .hero-bg {
+                clip-path: polygon(0 0, 100% 0, 100% 55%, 0 100%);
+                width: 100%;
+                height: 55%;
+            }
+
+            .hero-content {
+                text-align: center;
+                align-items: center;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            nav {
+                justify-content: center;
+                padding: 14px 18px;
+                gap: 0.6rem;
+            }
+
+            .hero {
+                padding: 128px 18px 38px;
+            }
+
+            .section-header h2 {
+                padding: 10px 28px;
+                font-size: 0.95rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about,
+            .skills-container,
+            .contact {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-top: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+  
+
+</style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact" class="contact-btn">Contact Me</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+
+        <div class="hero-content">
+            <p>Hi, I am</p>
+            <h1>Raj Shetty</h1>
+            <p class="subtitle">Frontend Developer / UI Designer</p>
+            <div class="social-links">
+                <a href="mailto:88rajshetty@gmail.com" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="My img.png" alt="Raj Shetty" loading="lazy">
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2>About Me</h2>
+        </div>
+        <p>I am a passionate frontend developer focused on creating clean, user-friendly interfaces. I believe in writing simple, maintainable code that provides great user experiences.</p>
+        <div class="services">
+            <div class="service-item">
+                <i data-lucide="layout"></i>
+                <h3>Design</h3>
+                <p>Crafting beautiful and functional user interfaces tailored to your brand.</p>
+            </div>
+            <div class="service-item">
+                <i data-lucide="code"></i>
+                <h3>Development</h3>
+                <p>Building fast, responsive websites using the latest web technologies.</p>
+            </div>
+            <div class="service-item">
+                <i data-lucide="settings"></i>
+                <h3>Maintenance</h3>
+                <p>Keeping your web applications up to date and running smoothly.</p>
+            </div>
+            <div class="service-item">
+                <i data-lucide="trending-up"></i>
+                <h3>SEO &amp; Marketing</h3>
+                <p>Optimizing your presence to ensure you reach the right audience effectively.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-container">
+        <div class="section-header">
+            <h2>Skills</h2>
+        </div>
+
+        <div class="skill-category">
+            <h4>Using Now:</h4>
+            <div class="skill-grid">
+                <div class="skill-item"><i data-lucide="file-code"></i><span>HTML5</span></div>
+                <div class="skill-item"><i data-lucide="box"></i><span>CSS3</span></div>
+                <div class="skill-item"><i data-lucide="type"></i><span>JavaScript</span></div>
+                <div class="skill-item"><i data-lucide="atom"></i><span>React</span></div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h4>Learning:</h4>
+            <div class="skill-grid">
+                <div class="skill-item"><i data-lucide="server"></i><span>Node.js</span></div>
+                <div class="skill-item"><i data-lucide="database"></i><span>MongoDB</span></div>
+                <div class="skill-item"><i data-lucide="shield-check"></i><span>TypeScript</span></div>
+                <div class="skill-item"><i class="fa-brands fa-figma"></i><span>Figma</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio">
+        <div class="portfolio-banner">
+            <div class="section-header">
+                <h2>Portfolio</h2>
+            </div>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600" alt="Work 1">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600" alt="Work 2">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600" alt="Work 3">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=600" alt="Work 4">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&q=80&w=600" alt="Work 5">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600" alt="Work 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <h2>Contact</h2>
+        </div>
+        <p>I am currently open to freelance opportunities and full-time roles. Let's build something together!</p>
+
+        <form class="contact-form" id="contactForm">
+            <input type="text" placeholder="Enter your name" required>
+            <input type="email" placeholder="Enter your email" required>
+            <input type="tel" placeholder="Enter your phone number">
+            <textarea rows="5" placeholder="Your message"></textarea>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="mailto:88rajshetty@gmail.com" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <p class="footer-copy">© 2024 Raj Shetty. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "SENT!";
+            btn.style.borderColor = "green";
+            btn.style.color = "green";
+            e.target.reset();
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.borderColor = "black";
+                btn.style.color = "black";
+            }, 3000);
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

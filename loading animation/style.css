@@ -1,0 +1,67 @@
+.loader{
+    position: fixed;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    background-color:black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader .circle{
+    --circle-size:300px;
+    height:var(--circle-size);
+    width:var(--circle-size);
+    /*background-color:blue;*/
+    border-radius: 50%;
+    position: relative;
+}
+
+.loader .dot{
+    --total-dots: 8;
+    --duration:3000ms;
+    --dot-decrement:calc(1px * var(--i));
+    --dot-size: calc(20px - var(--dot-decrement));
+    height: var(--dot-size);
+    width: var(--dot-size);
+    background-color: white;
+    position:absolute;
+    left: calc(50% - var(--dot-size)/ 2);
+    top: calc(0% - var(--dot-size)/ 2);
+    transform-origin: calc(var(--dot-size)/ 2) calc((var(--circle-size)/ 2) + var(--dot-size)/ 2);
+    animation: spin var(--duration)ease-out infinite;
+    animation-delay: calc(((var(--duration)/ 2)/ var(--total-dots))*var(--i));
+    border-radius: 50%;
+
+  
+}
+
+@keyframes spin{
+    0%{
+        transform: rotate(0);
+    }
+    50%,100%{
+        transform: rotate(360deg);
+    }
+}
+
+.loading{
+    color: aliceblue;
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 120px;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+    z-index: 1001;
+}
+
+ @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+

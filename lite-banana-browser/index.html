@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lite Banana 🍌 - Simple Web Browser</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Lite Banana <span>🍌</span></div>
+        
+        <div class="nav-controls">
+            <button class="btn-icon" id="btn-back" title="Back"><i data-lucide="arrow-left" size="18"></i></button>
+            <button class="btn-icon" id="btn-forward" title="Forward"><i data-lucide="arrow-right" size="18"></i></button>
+            <button class="btn-icon" id="btn-reload" title="Reload"><i data-lucide="refresh-cw" size="18"></i></button>
+            <button class="btn-icon" id="btn-home" title="Home"><i data-lucide="home" size="18"></i></button>
+        </div>
+
+        <div class="address-bar-container">
+            <input type="text" id="address-input" placeholder="Search Google or type a URL" autocomplete="off">
+        </div>
+    </header>
+
+    <main id="browser-container">
+        <!-- New Tab Start Page -->
+        <div id="start-page">
+            <div class="google-logo-style">
+                <span style="color: #4285F4">L</span><span style="color: #EA4335">i</span><span style="color: #FBBC05">t</span><span style="color: #4285F4">e</span> 
+                <span style="color: #34A853">B</span><span style="color: #EA4335">a</span><span style="color: #FBBC05">n</span><span style="color: #4285F4">a</span><span style="color: #34A853">n</span><span style="color: #EA4335">a</span>
+            </div>
+            
+            <div class="shortcuts-grid" id="shortcuts">
+                <div class="shortcut-item" onclick="loadUrl('https://www.google.com/search?igu=1')">
+                    <div class="shortcut-icon" style="color: #4285F4">G</div>
+                    <span>Google</span>
+                </div>
+                
+                <div class="shortcut-item" onclick="loadUrl('https://www.wikipedia.org')">
+                    <div class="shortcut-icon" style="color: #333">W</div>
+                    <span>Wikipedia</span>
+                </div>
+                <div class="shortcut-item" onclick="loadUrl('https://www.bing.com')">
+                    <div class="shortcut-icon" style="color: #00809d">b</div>
+                    <span>Bing</span>
+                </div>
+                <div class="shortcut-item" onclick="loadUrl('https://www.archive.org')">
+                    <div class="shortcut-icon" style="color: #000">A</div>
+                    <span>Archive</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web View Port -->
+        <iframe id="browser-viewport" src="about:blank"></iframe>
+    </main>
+
+    <div class="iframe-notice">Note: Some sites block iframes. If a site doesn't load, try searching instead.</div>
+
+   
+</body>
+<script src="script.js"></script>
+</html>

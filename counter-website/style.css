@@ -1,0 +1,106 @@
+/* Layout */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #056b3b;
+  color: #ffffff;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: 0.05em;
+}
+
+#count {
+  margin: 0;
+  font-size: clamp(3.5rem, 12vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+button {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.6rem;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  font-weight: 600;
+  margin: 0.35rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transition: transform 0.18s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  min-width: 130px;
+  width: min(220px, 40vw);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#increaseBtn {
+  background: rgba(88, 214, 141, 0.9);
+}
+
+#decrease {
+  background: rgba(255, 116, 115, 0.9);
+}
+
+#resetplusbtn,
+#resetminusbtn,
+#resetBothbtn {
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.95rem;
+  padding: 0.85rem 1.2rem;
+}
+
+#resetplusbtn:hover,
+#resetminusbtn:hover,
+#resetBothbtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 18px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.9rem 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  button {
+    padding: 0.85rem 0.95rem;
+    margin: 0.25rem 0;
+  }
+
+  #count {
+    font-size: 3.2rem;
+  }
+}
+

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeShop | Premium Second-Hand Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            margin: 0;
+            background: #fff;
+            color: #0f172a;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            background: #dc2626;
+            padding: 8px 10px;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            font-style: italic;
+            color: #0f172a;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #0f172a;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover { color: #dc2626; }
+        .nav-links a.admin-link { color: #94a3b8; }
+
+        .nav-cta {
+            background: #dc2626;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover { background: #b91c1c; }
+
+        /* ── SECTIONS ── */
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
+        /* ── HERO ── */
+        .hero-bg {
+            background:
+                linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                url('https://images.unsplash.com/photo-1558981403-c5f91cbba527?auto=format&fit=crop&q=80&w=2000')
+                center center / cover no-repeat;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #dc2626;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            margin: 0 0 1.5rem;
+        }
+
+        .hero-title span { color: #dc2626; font-style: italic; }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btn {
+            background: white;
+            color: #0f172a;
+            padding: 18px 40px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .hero-btn:hover { background: #dc2626; color: white; }
+
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ── BIKE CARD ── */
+        .bike-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bike-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .bike-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bike-card-img-wrap {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #dc2626;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .bike-card-body { padding: 1.5rem; }
+
+        .bike-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 8px;
+        }
+
+        .bike-card-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .bike-card-price {
+            font-size: 17px;
+            font-weight: 900;
+            color: #dc2626;
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        .bike-card-meta {
+            display: flex;
+            gap: 16px;
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .bike-card-meta i { color: #dc2626; margin-right: 4px; }
+
+        .bike-card-btn {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #0f172a;
+            border-radius: 12px;
+            background: transparent;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .bike-card-btn:hover { background: #0f172a; color: white; }
+
+        /* ── FILTER SIDEBAR ── */
+        .filter-box {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 32px;
+            position: sticky;
+            top: 88px;
+        }
+
+        .filter-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            font-size: 14px;
+            margin-bottom: 1.5rem;
+            outline: none;
+            color: #0f172a;
+            cursor: pointer;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 6px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #dc2626;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #dc2626;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #dc2626;
+            cursor: pointer;
+            border: 3px solid white;
+        }
+
+        /* ── DETAILS PAGE ── */
+        .details-img {
+            width: 100%;
+            height: 460px;
+            object-fit: contain;
+            object-position: center;
+            background: #f8fafc;
+            border-radius: 32px;
+            display: block;
+        }
+
+        .details-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+        }
+
+        .details-stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: #94a3b8;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .details-stat-val { font-weight: 700; color: #0f172a; }
+
+        .btn-book {
+            width: 100%;
+            background: #dc2626;
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            font-weight: 900;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 12px;
+        }
+
+        .btn-book:hover { background: #b91c1c; }
+
+        .btn-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-call, .btn-wa {
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-call { background: #0f172a; color: white; }
+        .btn-wa   { background: #22c55e; color: white; }
+        .btn-call:hover, .btn-wa:hover { opacity: 0.85; }
+
+        /* ── ADMIN ── */
+        .admin-form-card {
+            background: #0f172a;
+            color: white;
+            padding: 2.5rem;
+            border-radius: 32px;
+        }
+
+        .admin-form-input {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .admin-form-input:focus { border-color: #dc2626; }
+        .admin-form-input::placeholder { color: #64748b; }
+
+        .admin-form-select {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .admin-save-btn {
+            width: 100%;
+            background: #dc2626;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.2s;
+        }
+
+        .admin-save-btn:hover { background: #b91c1c; }
+
+        .admin-item {
+            background: white;
+            border: 1px solid #f1f5f9;
+            padding: 1.25rem 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-item-thumb {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .admin-item-name { font-weight: 700; font-size: 15px; color: #0f172a; }
+        .admin-item-meta { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+        .admin-del-btn {
+            color: #dc2626;
+            background: #fef2f2;
+            border: none;
+            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .admin-del-btn:hover { background: #fee2e2; }
+
+        .tab-active { font-weight: 700; color: #dc2626; text-decoration: underline; }
+        .tab-inactive { font-weight: 700; color: #94a3b8; }
+
+        .orders-wrap {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 32px;
+            overflow-x: auto;
+        }
+
+        .orders-table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .orders-table th {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: #94a3b8;
+            letter-spacing: 0.06em;
+            padding: 12px 16px;
+        }
+
+        .orders-table td {
+            padding: 14px 16px;
+            font-weight: 700;
+            border-top: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+
+        .orders-table td.price { color: #dc2626; }
+        .orders-table td.success { color: #16a34a; }
+        .orders-table td.id { color: #94a3b8; }
+
+        /* ── SECTION GRIDS ── */
+        .bikes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .shop-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .shop-sidebar { width: 260px; flex-shrink: 0; }
+        .shop-main { flex: 1; min-width: 0; }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: 900;
+            margin-bottom: 3rem;
+            color: #0f172a;
+        }
+
+        .section-title span { color: #dc2626; }
+
+        /* ── ABOUT / CONTACT ── */
+        .about-wrap { text-align: center; padding: 5rem 0; }
+        .about-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; font-style: italic; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .about-title span { color: #dc2626; }
+        .about-text { font-size: 1.1rem; color: #64748b; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+        .contact-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 32px;
+        }
+
+        .contact-card p { margin-bottom: 1rem; font-size: 15px; color: #334155; }
+        .contact-card strong { color: #0f172a; }
+
+        .btn-wa-full {
+            width: 100%;
+            background: #22c55e;
+            color: white;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-wa-full:hover { background: #16a34a; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 4rem 0;
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        footer .foot-brand { font-size: 1.5rem; font-weight: 900; font-style: italic; color: #dc2626; }
+        footer .foot-sub { color: #475569; margin-top: 0.75rem; font-size: 14px; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            padding: 4rem;
+            text-align: center;
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 15px;
+            grid-column: 1 / -1;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .shop-layout { flex-direction: column; }
+            .shop-sidebar { width: 100%; }
+            .filter-box { position: static; }
+            .details-img { 
+                height: 420px;
+            }
+            .btn-row-2 { grid-template-columns: 1fr; }
+            .admin-form-card { padding: 1.5rem; }
+
+            #details-content > div {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .bikes-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .bike-card-img-wrap {
+                height: 180px;
+            }
+
+            .bike-card-img {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .bikes-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .bike-card-img-wrap {
+                height: 220px;
+            }
+
+            .bike-card-img {
+                height: 220px;
+            }
+
+            .bike-card-body {
+                padding: 1rem;
+            }
+
+            .bike-card-name {
+                font-size: 16px;
+            }
+
+            .bike-card-price {
+                font-size: 15px;
+            }
+
+            .details-img { 
+                height: 520px;
+            }
+
+            #details-content > div {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo" onclick="showSection('home')">
+            <div class="nav-logo-icon">
+                <i class="fa-solid fa-motorcycle"></i>
+            </div>
+            <span class="nav-logo-text">BIKESHOP</span>
+        </div>
+
+        <div class="nav-links">
+            <a onclick="showSection('home')">Home</a>
+            <a onclick="showSection('shop')">Shop</a>
+            <a onclick="showSection('about')">About</a>
+            <a onclick="showSection('contact')">Contact</a>
+            <a onclick="showSection('admin')" class="admin-link">Admin</a>
+        </div>
+
+        <button class="nav-cta" onclick="showSection('shop')">View Bikes</button>
+    </div>
+</nav>
+
+<main style="padding-top: 72px;">
+
+    <!-- HOME -->
+    <section id="home-section" class="content-section">
+        <div class="hero-bg">
+            <div class="container">
+                <div style="max-width: 680px;">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-circle-check" style="font-size:12px;"></i>
+                        50+ Point Quality Checked
+                    </div>
+                    <h1 class="hero-title">
+                        BUY TRUSTED <br>
+                        <span>PRE-OWNED</span> BIKES.
+                    </h1>
+                    <p class="hero-sub">Verified Vehicles &bull; Best Price &bull; Easy Transfer Support.</p>
+                    <button class="hero-btn" onclick="showSection('shop')">
+                        Explore Inventory <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 5rem 0;">
+            <div class="container">
+                <h2 class="section-title">LATEST <span>ARRIVALS</span></h2>
+                <div id="featured-list" class="bikes-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop-section" class="content-section" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="shop-layout">
+                <aside class="shop-sidebar">
+                    <div class="filter-box">
+                        <h3 style="font-size:18px; font-weight:900; margin:0 0 1.5rem;">Filters</h3>
+
+                        <label class="filter-label">Category</label>
+                        <select id="filter-type" class="filter-select" onchange="renderShop()">
+                            <option value="All">All Vehicles</option>
+                            <option value="Bike">Bikes Only</option>
+                            <option value="Scooter">Scooters Only</option>
+                        </select>
+
+                        <label class="filter-label">Max Price</label>
+                        <input type="range" id="filter-price" min="30000" max="300000" step="5000" value="300000" oninput="renderShop()">
+                        <p id="price-val" style="font-size:14px; font-weight:700; margin-top:10px; color:#0f172a;">Up to ₹3,00,000</p>
+                    </div>
+                </aside>
+
+                <div class="shop-main">
+                    <div id="bike-listing" class="bikes-grid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section id="details-section" class="content-section" style="padding: 5rem 0;">
+        <div class="container" id="details-content"></div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin-section" class="content-section" style="padding: 5rem 0;">
+        <div class="container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem;">
+                <h2 style="font-size:clamp(1.75rem,4vw,2.5rem); font-weight:900; font-style:italic; margin:0;">ADMIN PANEL</h2>
+                <div style="display:flex; gap:1rem;">
+                    <button id="tab-inv-btn" class="tab-active" onclick="switchAdminTab('inventory')" style="border:none; background:none; cursor:pointer; font-size:15px; padding:0;">Inventory</button>
+                    <button id="tab-ord-btn" class="tab-inactive" onclick="switchAdminTab('orders')" style="border:none; background:none; cursor:pointer; font-size:15px; padding:0;">Payments</button>
+                </div>
+            </div>
+
+            <!-- Inventory Tab -->
+            <div id="admin-inventory" style="display:grid; grid-template-columns: 1fr 2fr; gap:2rem; align-items:start;">
+                <div class="admin-form-card">
+                    <h3 style="font-size:18px; font-weight:700; margin:0 0 1.5rem;">Add New Bike</h3>
+                    <input id="add-name"  class="admin-form-input" type="text"   placeholder="Name (e.g. Activa 6G)">
+                    <input id="add-price" class="admin-form-input" type="number" placeholder="Price (₹)">
+                    <input id="add-year"  class="admin-form-input" type="number" placeholder="Year">
+                    <input id="add-km"    class="admin-form-input" type="number" placeholder="KM driven">
+                    <select id="add-type" class="admin-form-select">
+                        <option value="Bike">Bike</option>
+                        <option value="Scooter">Scooter</option>
+                    </select>
+                    <button class="admin-save-btn" onclick="handleAddBike()">Save Vehicle</button>
+                </div>
+
+                <div id="admin-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="admin-orders" style="display:none;">
+                <div class="orders-wrap">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Bike</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about-section" class="content-section">
+        <div class="container">
+            <div class="about-wrap">
+                <h2 class="about-title">ABOUT <span>BIKESHOP</span></h2>
+                <p class="about-text">We are India's leading platform for quality-checked pre-owned two-wheelers. Our mission is to provide transparency and trust in every transaction — so you ride away confident.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section" class="content-section" style="padding: 5rem 0;">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center; font-style:italic; text-transform:uppercase;">CONTACT <span>US</span></h2>
+            <div class="contact-card">
+                <p><strong>Phone:</strong> +91 98224 58965</p>
+                <p><strong>WhatsApp:</strong> +91 98765 43210</p>
+                <p><strong>Email:</strong> support@bikeshop.com</p>
+                <button class="btn-wa-full">
+                    <i class="fa-brands fa-whatsapp" style="margin-right:8px;"></i>
+                    Message Us on WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p class="foot-brand">BIKESHOP</p>
+        <p class="foot-sub">Verified second-hand vehicles at the best market prices.</p>
+    </div>
+</footer>
+
+<script>
+    /* ── DATA ── */
+    let bikes = [
+        { id: 1, name: 'KTM Duke 350', price: 145000, year: 2021, km: 12500, fuel: 'Petrol', brand: 'KTM', type: 'Bike', cc: 350, reg: 'MH-12', condition: 'Excellent', image: 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800' },
+        { id: 2, name: 'Kawasaki Ninja',            price: 620000,  year: 2022, km: 4200,  fuel: 'Petrol', brand: 'Kawasaki',         type: 'Bike', cc: 110, reg: 'GA-03', condition: 'Excellent', image: 'https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?w=800' },
+        { id: 3, name: 'Ducati',               price: 385000, year: 2020, km: 18000, fuel: 'Petrol', brand: 'Ducati',           type: 'Bike', cc: 250, reg: 'KA-01', condition: 'Good',      image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800'},
+        { id: 4, name: 'Yamaha R15 250',               price: 90000, year: 2022, km: 8000,  fuel: 'Petrol', brand: 'Yamaha',           type: 'Bike', cc: 390, reg: 'DL-01', condition: 'Excellent', image: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800' }
+    ];
+
+    let orders = [];
+
+    /* ── NAVIGATION ── */
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(id + '-section');
+        if (target) target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+
+        if (id === 'home')  renderFeatured();
+        if (id === 'shop')  renderShop();
+        if (id === 'admin') renderAdmin();
+    }
+
+    /* ── BIKE CARD HTML ── */
+    function createBikeCard(bike) {
+        return `
+            <div class="bike-card" onclick="viewDetails(${bike.id})">
+                <div class="bike-card-img-wrap">
+                    <img src="${bike.image}" class="bike-card-img" alt="${bike.name}" loading="lazy">
+                    <span class="verified-badge">Verified</span>
+                </div>
+                <div class="bike-card-body">
+                    <div class="bike-card-header">
+                        <h3 class="bike-card-name">${bike.name}</h3>
+                        <span class="bike-card-price">₹${bike.price.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="bike-card-meta">
+                        <span><i class="fa-solid fa-calendar"></i>${bike.year}</span>
+                        <span><i class="fa-solid fa-gauge"></i>${bike.km.toLocaleString('en-IN')} KM</span>
+                        <span><i class="fa-solid fa-tag"></i>${bike.type}</span>
+                    </div>
+                    <button class="bike-card-btn">View Details</button>
+                </div>
+            </div>
+        `;
+    }
+
+    /* ── RENDERERS ── */
+    function renderFeatured() {
+        const el = document.getElementById('featured-list');
+        if (!el) return;
+        el.innerHTML = bikes.slice(0, 3).map(createBikeCard).join('');
+    }
+
+    function renderShop() {
+        const type  = document.getElementById('filter-type').value;
+        const price = parseInt(document.getElementById('filter-price').value);
+        document.getElementById('price-val').textContent = `Up to ₹${price.toLocaleString('en-IN')}`;
+
+        const filtered = bikes.filter(b => (type === 'All' || b.type === type) && b.price <= price);
+        const el = document.getElementById('bike-listing');
+        if (!el) return;
+
+        el.innerHTML = filtered.length
+            ? filtered.map(createBikeCard).join('')
+            : '<div class="empty-state">No bikes match your filters.</div>';
+    }
+
+    function viewDetails(id) {
+        const bike = bikes.find(b => b.id === id);
+        if (!bike) return;
+
+        showSection('details');
+
+        document.getElementById('details-content').innerHTML = `
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+                <img src="${bike.image}" class="details-img" alt="${bike.name}" loading="lazy">
+                <div>
+                    <h1 style="font-size:clamp(1.75rem,4vw,3rem); font-weight:900; margin:0 0 0.75rem; color:#0f172a;">${bike.name}</h1>
+                    <p style="font-size:2rem; font-weight:900; color:#dc2626; margin:0 0 2rem;">₹${bike.price.toLocaleString('en-IN')}</p>
+
+                    <div class="details-stats">
+                        <div>
+                            <p class="details-stat-label">Year</p>
+                            <p class="details-stat-val">${bike.year}</p>
+                        </div>
+                        <div>
+                            <p class="details-stat-label">KM Driven</p>
+                            <p class="details-stat-val">${bike.km.toLocaleString('en-IN')}</p>
+                        </div>
+                        <div>
+                            <p class="details-stat-label">Reg No.</p>
+                            <p class="details-stat-val">${bike.reg}</p>
+                        </div>
+                        <div>
+                            <p class="details-stat-label">Fuel</p>
+                            <p class="details-stat-val">${bike.fuel || 'Petrol'}</p>
+                        </div>
+                        <div>
+                            <p class="details-stat-label">Type</p>
+                            <p class="details-stat-val">${bike.type}</p>
+                        </div>
+                        <div>
+                            <p class="details-stat-label">Condition</p>
+                            <p class="details-stat-val">${bike.condition || 'Good'}</p>
+                        </div>
+                    </div>
+
+                    <button class="btn-book" onclick="processPayment(${bike.id})">
+                        BOOK NOW &nbsp;—&nbsp; ₹5,000 Token
+                    </button>
+
+                    <div class="btn-row-2">
+                        <button class="btn-call">
+                            <i class="fa-solid fa-phone" style="margin-right:8px;"></i>Call Seller
+                        </button>
+                        <button class="btn-wa">
+                            <i class="fa-brands fa-whatsapp" style="margin-right:8px;"></i>WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /* ── ADMIN ── */
+    function renderAdmin() {
+        const list = document.getElementById('admin-list');
+        if (list) {
+            list.innerHTML = bikes.length
+                ? bikes.map(bike => `
+                    <div class="admin-item">
+                        <div style="display:flex; align-items:center; gap:14px; flex:1; min-width:0;">
+                            <img src="${bike.image}" class="admin-item-thumb" alt="${bike.name}" loading="lazy">
+                            <div style="min-width:0;">
+                                <p class="admin-item-name">${bike.name}</p>
+                                <p class="admin-item-meta">₹${bike.price.toLocaleString('en-IN')} &bull; ${bike.year} &bull; ${bike.type}</p>
+                            </div>
+                        </div>
+                        <button class="admin-del-btn" onclick="deleteBike(${bike.id})" title="Delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('')
+                : '<p style="color:#94a3b8; font-weight:700; padding:2rem;">No bikes in inventory.</p>';
+        }
+
+        const tbody = document.getElementById('orders-table-body');
+        if (tbody) {
+            tbody.innerHTML = orders.length
+                ? orders.map(o => `
+                    <tr>
+                        <td class="id">#${o.id}</td>
+                        <td>${o.bikeName}</td>
+                        <td class="price">₹${o.amount.toLocaleString('en-IN')}</td>
+                        <td class="success">SUCCESS</td>
+                    </tr>
+                `).join('')
+                : '<tr><td colspan="4" style="padding:3rem; text-align:center; color:#94a3b8; font-weight:700;">No payments yet.</td></tr>';
+        }
+    }
+
+    function handleAddBike() {
+        const name  = document.getElementById('add-name').value.trim();
+        const price = parseInt(document.getElementById('add-price').value);
+        const year  = parseInt(document.getElementById('add-year').value) || new Date().getFullYear();
+        const km    = parseInt(document.getElementById('add-km').value)    || 0;
+        const type  = document.getElementById('add-type').value;
+
+        if (!name || !price || isNaN(price)) {
+            alert('Please fill in at least the name and price.');
+            return;
+        }
+
+        bikes.push({
+            id: Date.now(),
+            name, price, year, km, type,
+            fuel: 'Petrol',
+            reg: 'MH-NEW',
+            condition: 'Good',
+            image: 'https://images.unsplash.com/photo-1558981403-c5f91cbba527?w=800'
+        });
+
+        ['add-name','add-price','add-year','add-km'].forEach(id => document.getElementById(id).value = '');
+        renderAdmin();
+    }
+
+    function deleteBike(id) {
+        if (!confirm('Delete this bike from inventory?')) return;
+        bikes = bikes.filter(b => b.id !== id);
+        renderAdmin();
+    }
+
+    function switchAdminTab(tab) {
+        const isInv = tab === 'inventory';
+        document.getElementById('admin-inventory').style.display = isInv ? 'grid' : 'none';
+        document.getElementById('admin-orders').style.display    = isInv ? 'none' : 'block';
+        document.getElementById('tab-inv-btn').className = isInv ? 'tab-active' : 'tab-inactive';
+        document.getElementById('tab-ord-btn').className = isInv ? 'tab-inactive' : 'tab-active';
+    }
+
+    function processPayment(bikeId) {
+        const bike = bikes.find(b => b.id === bikeId);
+        if (!bike) return;
+        orders.push({
+            id: Math.floor(1000 + Math.random() * 9000),
+            bikeName: bike.name,
+            amount: 5000
+        });
+        alert(`Payment Successful!\nYour booking for "${bike.name}" is confirmed.\nOur team will contact you shortly.`);
+        showSection('home');
+    }
+
+    /* ── INIT ── */
+    window.onload = () => showSection('home');
+</script>
+</body>
+</html>

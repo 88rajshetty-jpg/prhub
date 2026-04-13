@@ -1,0 +1,252 @@
+/* Google Fonts-Poppins*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+    
+}
+
+body {
+    min-height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    background-image: url(Water\ Fall\ Image.gif);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container{
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: rgba(202, 202, 202, 0);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        backdrop-filter: blur(7.3px);
+        -webkit-backdrop-filter: blur(7.3px);
+        border: 0.2px solid rgba(202, 202, 202, 0.1);
+}
+
+.form :where(.input-box input, .Select-box){
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top:8px;
+    border:1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.input-box input:focus{
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form .column{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Make direct children in columns grow to fill available space */
+.form .column > * {
+    flex: 1;
+    min-width: 0; /* prevent overflow inside flex items */
+}
+
+/* Ensure select fills its container */
+.Select-box {
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+}
+
+.Select-box select {
+    display: inline-flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+    background: #fff;
+    color: #707070;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.form .gender-box{
+margin-top: 20px;
+}
+
+.gender-box h3 {
+    color: #333;
+    font-size:1rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.form :where(.gender-option,.gender) {
+    display: flex;
+    align-items:center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+}
+
+.gender label{
+    color: #707070
+}
+
+.form .gender{
+column-gap: 5px;
+cursor: pointer;
+}
+
+.gender input{
+    accent-color:  rgb(130, 106, 251) ;
+}
+
+.form:where(.gender input, .gender label ) {
+cursor:pointer;
+}
+
+.address :where(input, .Select-box){
+    margin-top: 15px;
+}
+
+.Select-box {
+    background: #fff;
+}
+
+.Select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color:#707070;
+    font-size: 1rem;
+    padding: 0 15px;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.form button {
+    height: 55px;
+    width: 100%;
+    color:#fff;
+    font: size 1rem;
+    border: none;
+    margin-top:30px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background-color: rgb(130, 106, 251);
+}
+.form button:hover{
+    background-color:rgb(88, 56, 250);
+}
+
+.page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: slidedown 1s ease-out forwards;
+
+
+}
+
+@keyframes slidedown {
+  from { transform: translatey(-100%);
+    opacity: 0;
+     }
+
+  to { 
+    transform: translatey(0); 
+    opacity: 1;
+}
+}
+
+
+/* Responsive */
+@media screen and (max-width:500px) {
+    body {
+        padding: 15px;
+        background-attachment: scroll;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .form .input-box {
+        margin-top: 15px;
+    }
+
+    .form :where(.input-box input, .Select-box) {
+        height: 55px;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+
+    .form .column {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form .column > * {
+        width: 100%;
+    }
+
+    .form :where(.gender-option,.gender) {
+        flex-direction: column;
+        align-items: flex-start;
+        column-gap: 0;
+        row-gap: 10px;
+    }
+
+    .form .gender {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .form :where(.input-box input, .Select-box) {
+        height: 52px;
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+
+    .form button {
+        height: 52px;
+        font-size: 16px;
+    }
+}
