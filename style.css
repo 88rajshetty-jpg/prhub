@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fredoka+One&display=swap');
 
 body {
-    background: linear-gradient(135deg, #1d2671, #c33764);
+  background: linear-gradient(135deg, #1d2671, #c33764);
   min-height: 100vh;
   color: white;
   text-align: center;
@@ -21,10 +21,31 @@ body {
 /* HEADER */
 header {
   padding: 30px;
+  position: relative;
+}
+
+.inspired-label {
+  position: static;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  text-align: center;
 }
 
 header h1 {
   font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.byline {
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-style: italic;
 }
 
 /* FILTER BUTTONS */
@@ -143,5 +164,15 @@ header h1 {
 @media (max-width: 600px) {
   header h1 {
     font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .inspired-label {
+    position: static;   /* absolute hata diya */
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 0.7rem;
   }
 }
